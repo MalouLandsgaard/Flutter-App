@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/views.dart';
+import 'package:flutter_app/globals/views.dart';
+import 'package:flutter_app/globals/constants.dart' as constants;
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -10,13 +11,13 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   var menuItems = [""];
-  Color blue = const Color(0xFF0D85FA);
+  Color appColor = constants.APP_COLOR;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-          BoxDecoration(color: blue, borderRadius: BorderRadius.circular(15)),
+      decoration: BoxDecoration(
+          color: appColor, borderRadius: BorderRadius.circular(15)),
       width: 250,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -52,7 +53,7 @@ class _MenuState extends State<Menu> {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Container(
         decoration: BoxDecoration(
-            color: active ? Colors.white : null,
+            color: active ? Color(0xFFF0F3FF) : null,
             borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -61,7 +62,7 @@ class _MenuState extends State<Menu> {
             children: [
               Icon(
                 view.icon,
-                color: active ? blue : Colors.white,
+                color: active ? appColor : Colors.white,
               ),
               SizedBox(
                 width: 20,
@@ -71,7 +72,7 @@ class _MenuState extends State<Menu> {
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w600,
-                  color: active ? blue : Colors.white,
+                  color: active ? appColor : Colors.white,
                 ),
               ),
             ],

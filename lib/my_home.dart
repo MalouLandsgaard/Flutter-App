@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/home.dart';
-import 'package:flutter_app/menu.dart';
+import 'package:flutter_app/views/dashboard/home.dart';
+import 'package:flutter_app/views/menu.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -15,9 +15,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF0F3FF),
+      //backgroundColor: Color(0xFFF0F3FF),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Row(children: [Menu(), HomeView()]),
+        child: Row(children: [Menu(), SizedBox(width: 20), HomeView()]),
       ),
     );
   }
