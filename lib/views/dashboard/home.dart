@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/globals/platforms.dart';
@@ -20,46 +21,92 @@ class _HomeViewState extends State<HomeView> {
     return Expanded(
       child: Column(
         children: [
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                view(),
+                const SizedBox(width: 20),
+                leftPanel(),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget view() {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Hey, Jane",
+                    style: TextStyle(
+                        color: appColor,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600)),
+                //searchBar()
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
           Row(
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Hey, Jane",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: appColor,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w700)),
-                        //searchBar()
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    gradient: LinearGradient(
+                      begin: Alignment(-1, 1),
+                      end: Alignment(1, -1),
+                      colors: [
+                        Colors.white,
+                        appColor,
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          color: appColor,
-                          borderRadius: BorderRadius.circular(15)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Earn \$ by selling your anonymized data",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600)),
+                        Container(
+                          width: 300,
+                          child: Text(
+                              "The earnings will vary in size based on the amount, quality and diversity of the data",
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400)),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 20),
-                    platformWidget()
-                  ],
+                  ),
                 ),
               ),
-              const SizedBox(width: 20),
-              Container(
-                width: 250,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("hello")],
-                ),
-              )
             ],
-          )
+          ),
+          SizedBox(height: 20),
+          platformWidget(),
+          SizedBox(height: 20),
+          popularWidget(),
         ],
       ),
     );
@@ -84,34 +131,51 @@ class _HomeViewState extends State<HomeView> {
             spacing: 20,
             children: List.generate(
                 PlatformEnum.values.length,
-                (index) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: PlatformEnum.values[index].color,
-                      //color: Colors.white
-                    ),
-                    width: 90,
-                    height: 90,
-                    child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: PlatformEnum.values[index].icon),
-                            SizedBox(height: 7),
-                            Text(PlatformEnum.values[index].name,
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500))
-                          ],
-                        )))),
+                (index) => Column(
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                //color: PlatformEnum.values[index].color,
+                                color: Colors.white),
+                            width: 80,
+                            height: 80,
+                            child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: PlatformEnum.values[index].icon)),
+                        // SizedBox(height: 5),
+                        // Text(PlatformEnum.values[index].name,
+                        //     style: TextStyle(
+                        //         fontSize: 10,
+                        //         fontFamily: 'Poppins',
+                        //         color: PlatformEnum.values[index].color,
+                        //         fontWeight: FontWeight.w600))
+                      ],
+                    )),
           ),
         )
+      ],
+    );
+  }
+
+  Widget popularWidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Popular Stats",
+                style: TextStyle(
+                    fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
+            viewAllButton("Unknown"),
+          ],
+        ),
+        Container(
+          height: 200,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+        ),
       ],
     );
   }
@@ -162,5 +226,127 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
     ));
+  }
+
+  Widget leftPanel() {
+    return SizedBox(
+      width: 250,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: appColor,
+                          borderRadius: BorderRadius.circular(5)),
+                      width: 30,
+                      height: 30,
+                      child: Icon(
+                        Iconsax.woman5,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: appColor,
+                          borderRadius: BorderRadius.circular(5)),
+                      width: 30,
+                      height: 30,
+                      child: Icon(
+                        Iconsax.man5,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                  ],
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: appColor, borderRadius: BorderRadius.circular(5)),
+                  width: 30,
+                  height: 30,
+                  child: Icon(
+                    Iconsax.paintbucket5,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                              color: appColor,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Balance",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400)),
+                                Text("\$ 0",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    constraints: BoxConstraints(minHeight: 300),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Container()),
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Container()),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

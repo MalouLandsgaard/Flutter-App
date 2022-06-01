@@ -38,9 +38,9 @@ extension PlatformMapper on PlatformEnum {
 
   Widget get icon => SvgPicture.asset(
         icons[this] ?? '',
-        color: Colors.white,
+        //color: Colors.white,
         //color: Color(0xFFC9CCD6)
-        //color: color,
+        color: color,
       );
   String get name => names[this] ?? 'Unknown';
 
