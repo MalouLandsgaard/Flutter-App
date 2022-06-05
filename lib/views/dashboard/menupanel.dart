@@ -24,7 +24,7 @@ class _MenuPanelState extends State<MenuPanel> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            children: [logo(), Divider(), pages()],
+            children: [logo(), pages()],
           ),
           pop()
         ],
@@ -34,12 +34,12 @@ class _MenuPanelState extends State<MenuPanel> {
 
   Widget logo() {
     return Container(
-      height: 75,
+      height: 70,
       alignment: Alignment.centerLeft,
       child: const Padding(
         padding: EdgeInsets.all(20),
         child: Padding(
-          padding: EdgeInsets.only(left: 13),
+          padding: EdgeInsets.only(left: 8),
           child: Text("Identity.",
               style: TextStyle(
                 color: Colors.white,
@@ -53,7 +53,7 @@ class _MenuPanelState extends State<MenuPanel> {
 
   Widget pages() {
     return Wrap(
-      runSpacing: 20,
+      runSpacing: 10,
       children: List.generate(
           ViewEnum.values.length,
           (index) =>
@@ -63,7 +63,7 @@ class _MenuPanelState extends State<MenuPanel> {
 
   Widget menuButton(ViewEnum view, bool active) {
     return Container(
-        height: 30,
+        height: 40,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -74,14 +74,17 @@ class _MenuPanelState extends State<MenuPanel> {
                   height: double.infinity,
                   color: active ? appColor : Colors.transparent,
                 ),
-                SizedBox(width: 30),
+                SizedBox(width: 25),
                 Container(
-                  height: 15,
-                  width: 15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: active ? appColor : greyColor,
+                  child: Icon(
+                    view.icon,
+                    color: active ? Colors.white : greyColor,
+                    size: 20,
                   ),
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(10),
+                  //   color: active ? appColor : greyColor,
+                  // ),
                 ),
                 SizedBox(width: 15),
                 Text(
@@ -122,14 +125,15 @@ class _MenuPanelState extends State<MenuPanel> {
       padding: const EdgeInsets.all(20.0),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15), color: Color(0xFF1B2434)),
+            borderRadius: BorderRadius.circular(15),
+            color: appColor.withOpacity(0.15)),
         height: width - 40,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
+              const Text(
                 "Upgrade to Pro version\nto get full features",
                 textAlign: TextAlign.center,
                 style: TextStyle(

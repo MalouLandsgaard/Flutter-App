@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 
 class DefaultButton extends StatefulWidget {
   final Color color;
+  final Color? textColor;
   final String text;
   final IconData? icon;
   const DefaultButton(
-      {Key? key, required this.color, required this.text, this.icon})
+      {Key? key,
+      required this.color,
+      required this.text,
+      this.icon,
+      this.textColor})
       : super(key: key);
 
   @override
@@ -35,8 +40,10 @@ class _DefaultButtonState extends State<DefaultButton> {
               : Container(),
           Text(
             widget.text,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                color: widget.textColor ?? Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w500),
           ),
         ],
       ),
