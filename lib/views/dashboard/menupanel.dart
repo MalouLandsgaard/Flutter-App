@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/globals/views.dart';
 import 'package:flutter_app/globals/constants.dart' as constants;
 import 'package:flutter_app/views/dashboard/button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 
 class MenuPanel extends StatefulWidget {
@@ -124,43 +125,58 @@ class _MenuPanelState extends State<MenuPanel> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: appColor.withOpacity(0.15)),
-        height: width - 40,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Text(
-                "Upgrade to Pro version\nto get full features",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w300),
+        height: 200,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: appColor.withOpacity(0.15)),
+              height: width - 40,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "Upgrade to Pro version\nto get full features",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: appColor,
+                        ),
+                        alignment: Alignment.center,
+                        height: 30,
+                        width: double.infinity,
+                        child: DefaultButton(color: appColor, text: "Upgrade")
+                        // Text(
+                        //   "Upgrade",
+                        //   style: TextStyle(
+                        //       color: Colors.white,
+                        //       fontSize: 12,
+                        //       fontWeight: FontWeight.w500),
+                        // ),
+                        ),
+                  ],
+                ),
               ),
-              SizedBox(height: 15),
-              Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: appColor,
-                  ),
-                  alignment: Alignment.center,
-                  height: 30,
-                  width: double.infinity,
-                  child: DefaultButton(color: appColor, text: "Upgrade")
-                  // Text(
-                  //   "Upgrade",
-                  //   style: TextStyle(
-                  //       color: Colors.white,
-                  //       fontSize: 12,
-                  //       fontWeight: FontWeight.w500),
-                  // ),
-                  ),
-            ],
-          ),
+            ),
+            Align(
+              alignment: Alignment(0, -1.3),
+              child: SvgPicture.asset(
+                'assets/platforms/Having fun.svg',
+                height: 110,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-enum ViewEnum { Dashboard, Platform, Gallery, Insight, Settings }
+enum ViewEnum { Dashboard, Services, Gallery, Insight, Settings, About }
 
 extension ViewMapper on ViewEnum {
   static const icons = {
     ViewEnum.Dashboard: Iconsax.layer5,
-    ViewEnum.Platform: Iconsax.layer5,
+    ViewEnum.Services: Iconsax.layer5,
     ViewEnum.Gallery: Iconsax.gallery5,
     ViewEnum.Insight: Iconsax.hierarchy_25,
     ViewEnum.Settings: Iconsax.candle5,
+    ViewEnum.About: Iconsax.heart5
   };
   static const names = {
     ViewEnum.Dashboard: "Dashboard",
-    ViewEnum.Platform: "Platform",
+    ViewEnum.Services: "Services",
     ViewEnum.Gallery: "Gallery",
     ViewEnum.Insight: "Insight",
-    ViewEnum.Settings: "Settings"
+    ViewEnum.Settings: "Settings",
+    ViewEnum.About: "About"
   };
 
   IconData get icon => icons[this] ?? Iconsax.box1;

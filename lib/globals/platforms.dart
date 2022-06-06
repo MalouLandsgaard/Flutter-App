@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/globals/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum PlatformEnum {
@@ -11,13 +12,22 @@ enum PlatformEnum {
 }
 
 extension PlatformMapper on PlatformEnum {
-  static const icons = {
+  static const icons2 = {
     PlatformEnum.Instagram: 'assets/platforms/InstagramS.svg',
     PlatformEnum.Facebook: 'assets/platforms/FacebookS.svg',
     PlatformEnum.LinkedIn: 'assets/platforms/LinkedInS.svg',
     PlatformEnum.Twitter: 'assets/platforms/TwitterS.svg',
     PlatformEnum.Pinterest: 'assets/platforms/PinterestS.svg',
     PlatformEnum.TikTok: 'assets/platforms/TikTokS.svg',
+  };
+
+  static const icons = {
+    PlatformEnum.Instagram: 'assets/platforms/Instagram.svg',
+    PlatformEnum.Facebook: 'assets/platforms/Facebook.svg',
+    PlatformEnum.LinkedIn: 'assets/platforms/LinkedIn.svg',
+    PlatformEnum.Twitter: 'assets/platforms/Twitter.svg',
+    PlatformEnum.Pinterest: 'assets/platforms/Pinterest.svg',
+    PlatformEnum.TikTok: 'assets/platforms/TikTok.svg',
   };
   static const names = {
     PlatformEnum.Instagram: "Instagram",
@@ -38,9 +48,9 @@ extension PlatformMapper on PlatformEnum {
 
   Widget get icon => SvgPicture.asset(
         icons[this] ?? '',
-        //color: Colors.white,
-        //color: Color(0xFFC9CCD6)
-        color: color,
+        //color: APP_COLOR,
+
+        //color: color,
       );
   String get name => names[this] ?? 'Unknown';
 

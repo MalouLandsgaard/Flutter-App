@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/globals/platforms.dart';
+import 'package:flutter_app/globals/tools.dart';
 import 'package:flutter_app/globals/views.dart';
 import 'package:flutter_app/globals/constants.dart' as constants;
 import 'package:flutter_app/views/dashboard/button.dart';
@@ -29,14 +31,20 @@ class _ViewState extends State<View> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               topBar(),
-              Container(
-                height: 2,
-                width: double.infinity,
-                // color: Color(0xFF1A1C20),
-              ),
-              overview(),
-              SizedBox(height: 20),
-              analyse()
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      overview(),
+                      SizedBox(height: 20),
+                      services(),
+                      SizedBox(height: 20),
+                      analyse(),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
           Column(
@@ -126,10 +134,7 @@ class _ViewState extends State<View> {
                   alignment: Alignment.bottomCenter,
                   color: appColor.withOpacity(0.15),
                   child: SvgPicture.asset('assets/platforms/wave2.svg',
-                      width: 550,
-                      fit: BoxFit.fitWidth,
-                      color: appColor,
-                      semanticsLabel: 'A red up arrow')),
+                      width: 550, fit: BoxFit.fitWidth, color: appColor)),
               Container(
                 height: 150,
                 child: Padding(
@@ -159,16 +164,51 @@ class _ViewState extends State<View> {
           ),
         ),
         const SizedBox(width: 20),
-        Expanded(
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: greyBoxColor),
+          height: 150,
           child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: greyBoxColor),
-            width: double.infinity,
             height: 150,
             child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                children: [Text("hello")],
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("@NORSEKODE",
+                          style: TextStyle(
+                              color: topGreyColor,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500)),
+                      SizedBox(height: 10),
+                      Text("Identity. as data management frontrunner?",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500)),
+                      SizedBox(height: 5),
+                      Text(
+                          "New startup shows that data management for users is easy",
+                          style: TextStyle(
+                              color: topGreyColor,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w400)),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Container(
+                          width: 110,
+                          child: DefaultButton(
+                              color: greyColor, text: "Read blog")),
+                    ],
+                  )
+                ],
               ),
             ),
           ),
@@ -177,21 +217,75 @@ class _ViewState extends State<View> {
     );
   }
 
-  // Widget view() {
-  //   return Stack(children: [
-  //     content(),
-  //     popUp(),
-  //   ]);
-  // }
+  Widget services() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text("Services " + EmojiParser().get("shamrock").code,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+          )),
+      SizedBox(height: 20),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Wrap(
+            spacing: 20,
+            children: List.generate(
+              PlatformEnum.values.length,
+              (index) => Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: greyBoxColor),
+                width: 180,
+                child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Container(
+                      height: 35,
+                      child: Row(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                //color: topGreyColor,
+                              ),
+                              width: 40,
+                              height: 40,
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: PlatformEnum.values[index].icon,
+                              )),
+                          SizedBox(width: 15),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(PlatformEnum.values[index].name,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500)),
+                              Text("Last upload: 6/6",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: topGreyColor,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500))
+                            ],
+                          )
+                        ],
+                      ),
+                    )),
+              ),
+            )),
+      )
+    ]);
+  }
 
   Widget analyse() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Row(
-        //   children: [Text(EmojiParser().get('vomit').code)],
-        // )
-        Text("Analyse tools " + EmojiParser().get("fire").code,
+        Text("Insight tools " + EmojiParser().get("fire").code,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 15,
@@ -203,141 +297,63 @@ class _ViewState extends State<View> {
           child: Wrap(
             spacing: 20,
             children: List.generate(
-                10,
-                (index) => Container(
-                      decoration: BoxDecoration(
+                ToolEnum.values.length,
+                (index) => ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
                         color: greyBoxColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: 250,
-                      width: 180,
-                    )),
+                        height: 210,
+                        width: 180,
+                        child: Column(
+                          children: [
+                            Container(
+                              color: ToolEnum.values[index].color,
+                              height: 80,
+                              width: double.infinity,
+                              alignment: Alignment.bottomRight,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Icon(ToolEnum.values[index].icon,
+                                    size: 60, color: greyBoxColor),
+                              ),
+                            ),
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(ToolEnum.values[index].name,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500)),
+                                        SizedBox(height: 5),
+                                        Text(ToolEnum.values[index].description,
+                                            style: TextStyle(
+                                                color: topGreyColor,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400)),
+                                      ],
+                                    ),
+                                    SizedBox(height: 15),
+                                    DefaultButton(
+                                        color: appColor, text: "Learn more")
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )))),
           ),
         ),
       ],
     );
   }
-
-  // Widget content2() {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Padding(
-  //         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-  //         child: Wrap(
-  //           spacing: 20,
-  //           children: [
-  //             Container(
-  //               decoration: BoxDecoration(
-  //                   border: Border(
-  //                       bottom: BorderSide(
-  //                 color: appColor,
-  //                 width: 3,
-  //               ))),
-  //               child: Column(
-  //                 children: [
-  //                   Text("  Overview  ",
-  //                       style: TextStyle(
-  //                           color: Colors.white,
-  //                           fontSize: 12,
-  //                           fontWeight: FontWeight.w500)),
-  //                   SizedBox(height: 15),
-  //                 ],
-  //               ),
-  //             ),
-  //             Column(
-  //               children: [
-  //                 Text("  Profile  ",
-  //                     style: TextStyle(
-  //                         color: greyColor,
-  //                         fontSize: 12,
-  //                         fontWeight: FontWeight.w500)),
-  //               ],
-  //             ),
-  //             Column(
-  //               children: [
-  //                 Text("  Activity  ",
-  //                     style: TextStyle(
-  //                         color: greyColor,
-  //                         fontSize: 12,
-  //                         fontWeight: FontWeight.w500)),
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       Container(
-  //         color: Color(0xFF1A1C20),
-  //         height: 2,
-  //         width: double.infinity,
-  //       ),
-  //       Padding(
-  //         padding: const EdgeInsets.all(20),
-  //         child: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             const Text("Newest Images",
-  //                 style: TextStyle(
-  //                   color: Colors.white,
-  //                   fontSize: 16,
-  //                   fontWeight: FontWeight.w500,
-  //                 )),
-  //             SizedBox(height: 20),
-  //             SingleChildScrollView(
-  //               scrollDirection: Axis.horizontal,
-  //               child: Wrap(
-  //                 spacing: 20,
-  //                 children: List.generate(
-  //                     10,
-  //                     (index) => Container(
-  //                           decoration: BoxDecoration(
-  //                             color: greyBoxColor,
-  //                             borderRadius: BorderRadius.circular(15),
-  //                           ),
-  //                           height: 250,
-  //                           width: 180,
-  //                         )),
-  //               ),
-  //             ),
-  //             SizedBox(height: 20),
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //               children: [
-  //                 Container(
-  //                   child: const Text("Newest Images",
-  //                       style: TextStyle(
-  //                         color: Colors.white,
-  //                         fontSize: 16,
-  //                         fontWeight: FontWeight.w500,
-  //                       )),
-  //                 ),
-  //                 SizedBox(width: 20),
-  //                 Container(
-  //                   child: const Text("Newest Images",
-  //                       style: TextStyle(
-  //                         color: Colors.white,
-  //                         fontSize: 16,
-  //                         fontWeight: FontWeight.w500,
-  //                       )),
-  //                 ),
-  //                 SizedBox(width: 20),
-  //                 Container(
-  //                   child: const Text("Newest Images",
-  //                       style: TextStyle(
-  //                         color: Colors.white,
-  //                         fontSize: 16,
-  //                         fontWeight: FontWeight.w500,
-  //                       )),
-  //                 ),
-  //               ],
-  //             ),
-  //             SizedBox(height: 20),
-  //           ],
-  //         ),
-  //       )
-  //     ],
-  //   );
-  // }
 
   Widget popUp() {
     return Padding(
@@ -370,7 +386,7 @@ class _ViewState extends State<View> {
                 DefaultButton(
                   color: Colors.red,
                   text: "Log Out",
-                  icon: Iconsax.logout,
+                  icon: Iconsax.arrow_left_35,
                 )
               ],
             ),
