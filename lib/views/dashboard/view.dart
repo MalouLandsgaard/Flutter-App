@@ -41,6 +41,8 @@ class _ViewState extends State<View> {
                       services(),
                       SizedBox(height: 20),
                       analyse(),
+                      SizedBox(height: 20),
+                      activities(),
                     ],
                   ),
                 ),
@@ -86,10 +88,16 @@ class _ViewState extends State<View> {
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: topGreyColor,
+                    color: appColor,
                   ),
+                  alignment: Alignment.center,
                   width: 30,
-                  height: 30)
+                  height: 30,
+                  child: Text("ML",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500)))
             ],
           )
         ],
@@ -219,12 +227,28 @@ class _ViewState extends State<View> {
 
   Widget services() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text("Services " + EmojiParser().get("shamrock").code,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-          )),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Services " + EmojiParser().get("shamrock").code,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              )),
+          Row(
+            children: [
+              Text("See all",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  )),
+              Icon(Iconsax.arrow_right_25, color: Colors.white, size: 12),
+            ],
+          )
+        ],
+      ),
       SizedBox(height: 20),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -285,12 +309,28 @@ class _ViewState extends State<View> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Insight tools " + EmojiParser().get("fire").code,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            )),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Insight tools " + EmojiParser().get("fire").code,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                )),
+            Row(
+              children: [
+                Text("See all",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    )),
+                Icon(Iconsax.arrow_right_25, color: Colors.white, size: 12),
+              ],
+            )
+          ],
+        ),
         SizedBox(height: 20),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -342,7 +382,14 @@ class _ViewState extends State<View> {
                                     ),
                                     SizedBox(height: 15),
                                     DefaultButton(
-                                        color: appColor, text: "Learn more")
+                                        color: ToolEnum.values[index] ==
+                                                ToolEnum.Anonymize
+                                            ? Colors.red
+                                            : appColor,
+                                        text: ToolEnum.values[index] ==
+                                                ToolEnum.Anonymize
+                                            ? "Pro Access"
+                                            : "Learn more")
                                   ],
                                 ),
                               ),
@@ -353,6 +400,94 @@ class _ViewState extends State<View> {
         ),
       ],
     );
+  }
+
+  Widget activities() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Activities " + EmojiParser().get("cricket_bat_and_ball").code,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              )),
+        ],
+      ),
+      SizedBox(height: 20),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            Container(
+                width: 250,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: greyBoxColor,
+                ),
+                child: Text("Events\n\n",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500))),
+            SizedBox(width: 20),
+            Container(
+                width: 250,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: greyBoxColor,
+                ),
+                child: Text("Interactions\n\n",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500))),
+            SizedBox(width: 20),
+            Container(
+                width: 250,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: greyBoxColor,
+                ),
+                child: Text("Content\n\n",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500))),
+            SizedBox(width: 20),
+            Container(
+                width: 250,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: greyBoxColor,
+                ),
+                child: Text("Third party\n\n",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500))),
+            SizedBox(width: 20),
+            Container(
+                width: 250,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: greyBoxColor,
+                ),
+                child: Text("Other\n\n",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500)))
+          ],
+        ),
+      )
+    ]);
   }
 
   Widget popUp() {
@@ -367,11 +502,11 @@ class _ViewState extends State<View> {
             boxShadow: [
               BoxShadow(
                   blurRadius: 12,
-                  spreadRadius: 2,
+                  spreadRadius: 4,
                   color: Color.fromARGB(255, 16, 19, 20))
             ],
             color: greyBoxColor, //Color(0xFF1E2429),
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
             padding: const EdgeInsets.all(15),
@@ -404,10 +539,16 @@ class _ViewState extends State<View> {
           Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: topGreyColor,
+                color: appColor,
               ),
               width: 40,
-              height: 40),
+              height: 40,
+              alignment: Alignment.center,
+              child: Text("ML",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500))),
           SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

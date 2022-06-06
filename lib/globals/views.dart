@@ -5,7 +5,7 @@ enum ViewEnum { Dashboard, Services, Gallery, Insight, Settings, About }
 
 extension ViewMapper on ViewEnum {
   static const icons = {
-    ViewEnum.Dashboard: Iconsax.layer5,
+    ViewEnum.Dashboard: Iconsax.element_35,
     ViewEnum.Services: Iconsax.layer5,
     ViewEnum.Gallery: Iconsax.gallery5,
     ViewEnum.Insight: Iconsax.hierarchy_25,

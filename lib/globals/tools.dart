@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/globals/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
 enum ToolEnum { Sentiment, Classifier, ModelTraining, Anonymize }
@@ -20,9 +21,9 @@ extension ToolMapper on ToolEnum {
 
   static const colors = {
     ToolEnum.Sentiment: Color(0xFF704EF2),
-    ToolEnum.Classifier: Color(0xFFDA65E1),
-    ToolEnum.ModelTraining: Color(0xFFFF917A),
-    ToolEnum.Anonymize: Color(0xFFFFC65D),
+    ToolEnum.Classifier: Color(0xFFFF478D),
+    ToolEnum.ModelTraining: Color(0xFFFF8760),
+    ToolEnum.Anonymize: Color(0xFFFFC44F),
   };
 
   static const icons = {

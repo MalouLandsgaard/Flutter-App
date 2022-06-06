@@ -114,7 +114,15 @@ class _MenuPanelState extends State<MenuPanel> {
                       borderRadius: BorderRadius.circular(3),
                       color: view == ViewEnum.Insight ? Colors.red : null),
                 ),
-                SizedBox(width: 30)
+                SizedBox(width: 5),
+                Container(
+                  height: 10,
+                  width: 10,
+                  child: view == ViewEnum.Insight
+                      ? Icon(Iconsax.arrow_right_25, color: greyColor, size: 12)
+                      : null,
+                ),
+                SizedBox(width: 28)
               ],
             ),
           ],
@@ -140,7 +148,7 @@ class _MenuPanelState extends State<MenuPanel> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     const Text(
-                      "Upgrade to Pro version\nto get full features",
+                      "Upgrade to Pro version\nto access all features",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
